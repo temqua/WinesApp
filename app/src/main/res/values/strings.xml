@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WinesApp</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad aspernatur at debitis dolor doloremque dolores expedita fuga id minima minus pariatur praesentium quisquam, reiciendis sed suscipit ut vel voluptates.</string>
+    <string name="winery">Winery:</string>
+    <string name="location">Location:</string>
+
+</resources>
