@@ -27,6 +27,7 @@ class WinesAdapter :
         val locationView = binding.wineLocation
         val wineryView = binding.wineryName
         val ratingsCountView = binding.wineRatingsCount
+        val colorView = binding.wineColor
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,6 +41,7 @@ class WinesAdapter :
         holder.ratingsCountView.text = wine.rating.reviews
         holder.ratingView.rating = wine.rating.average.toFloat()
         holder.nameView.text = wine.wine
+        holder.colorView.text = wine.color.toString()
         Glide.with(holder.logoView.context).load(wine.imageSrc).into(holder.logoView)
     }
 

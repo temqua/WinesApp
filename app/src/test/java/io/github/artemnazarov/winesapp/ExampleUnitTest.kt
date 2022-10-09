@@ -1,7 +1,7 @@
 package io.github.artemnazarov.winesapp
 
 import co.infinum.retromock.Retromock
-import io.github.artemnazarov.winesapp.data.RetrofitInstance
+import io.github.artemnazarov.winesapp.data.remote.RetrofitInstance
 import org.junit.Test
 
 import org.junit.Assert.*

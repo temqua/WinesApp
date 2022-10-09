@@ -1,4 +1,4 @@
-package io.github.artemnazarov.winesapp.data
+package io.github.artemnazarov.winesapp.data.remote
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
