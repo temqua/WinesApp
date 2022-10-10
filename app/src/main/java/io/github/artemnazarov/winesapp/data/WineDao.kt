@@ -6,14 +6,15 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy.ABORT
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 @Dao
 interface WineDao {
     @Query("SELECT * FROM wines")
     fun getAll(): Flow<List<Wine>>
 
-    @Query("SELECT * FROM wines WHERE wines.name LIKE :wine LIMIT 1")
-    fun findByName(wine: String): Wine
+    @Query("SELECT * FROM wines WHERE wines.name LIKE :wine ")
+    fun findByName(wine: String): Flow<List<Wine>>
 
     @Query("SELECT * FROM wines WHERE color LIKE '%red%'")
     fun getAllRed(): Flow<List<Wine>>

@@ -2,6 +2,7 @@ package io.github.artemnazarov.winesapp.data
 
 import io.github.artemnazarov.winesapp.data.remote.WineService
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 class WineRepository(private val service: WineService, private val dao: WineDao) {
 
@@ -19,6 +20,8 @@ class WineRepository(private val service: WineService, private val dao: WineDao)
     val sparkling: Flow<List<Wine>> = dao.getAllSparkling()
     val dessert: Flow<List<Wine>> = dao.getAllDessert()
     val port: Flow<List<Wine>> = dao.getAllPort()
+
+    fun findByName(query: String): Flow<List<Wine>> = dao.findByName(query)
 
     suspend fun insert(vararg wines: Wine) = dao.insert(*wines)
 

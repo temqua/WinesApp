@@ -2,6 +2,8 @@ package io.github.artemnazarov.winesapp
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -9,9 +11,10 @@ import io.github.artemnazarov.winesapp.data.Wine
 import io.github.artemnazarov.winesapp.databinding.ItemWinesBinding
 
 class WinesAdapter :
-    RecyclerView.Adapter<WinesAdapter.ViewHolder>() {
+    RecyclerView.Adapter<WinesAdapter.ViewHolder>(), Filterable {
 
     private var wines = mutableListOf<Wine>()
+    private var filteredWines = mutableListOf<Wine>()
 
     fun setWinesList(updatedWines: List<Wine>) {
         val diffResult = DiffUtil.calculateDiff(WinesDiffUtilCallback(wines, updatedWines))
@@ -46,5 +49,33 @@ class WinesAdapter :
     }
 
     override fun getItemCount(): Int = wines.size
+    override fun getFilter(): Filter = object : Filter() {
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            val filterResults = FilterResults()
+            if (constraint == null || constraint.isEmpty()) {
+                filterResults.count = wines.size
+                filterResults.values = wines
+            } else {
+                val searchStr = constraint.toString().lowercase()
+                val searchResult = wines.filter { it.wine == searchStr }
+                filterResults.values = searchResult
+                filterResults.count = searchResult.size
+            }
+            return filterResults
+        }
+
+        override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+            val diffResult = DiffUtil.calculateDiff(
+                WinesDiffUtilCallback(
+                    filteredWines,
+                    results!!.values as List<Wine>
+                )
+            )
+            filteredWines.clear()
+            filteredWines.addAll(results.values as List<Wine>)
+            diffResult.dispatchUpdatesTo(this@WinesAdapter)
+        }
+
+    }
 
 }

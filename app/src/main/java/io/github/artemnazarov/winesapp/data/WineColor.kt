@@ -1,7 +1,5 @@
 package io.github.artemnazarov.winesapp.data
 
-import androidx.room.Entity
-
 enum class WineColor(
     private val color: String
 ) {
